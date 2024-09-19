@@ -1,12 +1,12 @@
-// src/TreeDataStructure/Tree.java
+// src/Tree_Data_Structure/Tree.java
 package Tree_Data_Structure;
 
 public class Tree {
-    // Attributes
+    // Atributos
     private TreeNode root;
     private int size;
 
-    // Constructors
+    // Construtores
     public Tree() {
         this.root = null;
         this.size = 0;
@@ -32,14 +32,14 @@ public class Tree {
         return size;
     }
 
-    // Tree Functions
+    // Tree Funcoes
     public boolean isEmpty() {
         return size == 0 && root == null;
     }
 
     public int maxValue() {
         if (root == null) {
-            throw new RuntimeException("Tree eh null");
+            throw new RuntimeException("Tree é null");
         }
         return maxValue(root);
     }
@@ -47,18 +47,18 @@ public class Tree {
         if (node == null) {
             return Integer.MIN_VALUE;
         }
-        int max = node.data;
-        TreeNode child = node.firstChild;
+        int max = node.getData();
+        TreeNode child = node.getFirstChild();
         while (child != null) {
             max = Math.max(max, maxValue(child));
-            child = child.next;
+            child = child.getNext();
         }
         return max;
     }
 
     public int minValue() {
         if (root == null) {
-            throw new RuntimeException("Tree eh null");
+            throw new RuntimeException("Tree é null");
         }
         return minValue(root);
     }
@@ -66,21 +66,21 @@ public class Tree {
         if (node == null) {
             return Integer.MAX_VALUE;
         }
-        int min = node.data;
-        TreeNode child = node.firstChild;
+        int min = node.getData();
+        TreeNode child = node.getFirstChild();
         while (child != null) {
             min = Math.min(min, minValue(child));
-            child = child.next;
+            child = child.getNext();
         }
         return min;
     }
 
     public void addNode(TreeNode parentNode, TreeNode childNode) {
         if (parentNode == null) {
-            throw new NullPointerException(">> Parent node is null");
+            throw new NullPointerException("Pai de Node é null");
         }
-        childNode.setParent(parentNode);
 
+        childNode.setParent(parentNode);
         if (parentNode.getFirstChild() == null) {
             parentNode.setFirstChild(childNode);
         } else {
@@ -92,14 +92,13 @@ public class Tree {
         }
         this.size++;
     }
+
     public void removeNode(TreeNode node) {
         if (node == null) {
-            throw new NullPointerException(">> Node is null");
+            throw new NullPointerException("Node é null");
         }
-
         if (node == root) {
             this.root = null;
-            this.size--;
         } else {
             TreeNode parent = node.getParent();
             if (parent != null) {
@@ -115,41 +114,75 @@ public class Tree {
                     }
                 }
             }
-            this.size--;
         }
+        this.size--;
     }
 
-    // In Order traversal
+    public int height() {
+        if (root == null) {
+            return -1;
+        }
+        return root.height();
+    }
 
     // Pre Order traversal
     public void preOrder() {
         if (root == null) {
-            throw new NullPointerException(">> Tree eh null");
+            throw new NullPointerException("Tree é null");
         }
         System.out.print(">> Pre Order:\n[ ");
-        this.root.preOrder(this.root);
+        root.preOrder();
         System.out.println("]");
     }
 
-    // Pos Order traversal
+    // Post Order traversal
     public void postOrder() {
-       if (root == null) {
-            throw new NullPointerException(">> Tree eh null");
+        if (root == null) {
+            throw new NullPointerException("Tree é null");
         }
-        System.out.print(">> Pos Order:\n[ ");
-        this.root.postOrder(this.root);
+        System.out.print(">> Post Order:\n[ ");
+        root.postOrder();
         System.out.println("]");
     }
 
-    // Internal Class TreeNode
+    // Imprimir árvore no formato desejado
+    public void printTree() {
+        if (root == null) {
+            System.out.println("A árvore está vazia.");
+        } else {
+            printTree(root, "", true);
+        }
+    }
+
+    private void printTree(TreeNode node, String indent, boolean isLast) {
+        if (node != null) {
+            System.out.print(indent);
+            if (isLast) {
+                System.out.print("└── ");
+                indent += "    ";
+            } else {
+                System.out.print("├── ");
+                indent += "│   ";
+            }
+            System.out.println(node.getData());
+
+            TreeNode child = node.getFirstChild();
+            while (child != null) {
+                printTree(child, indent, child.getNext() == null);
+                child = child.getNext();
+            }
+        }
+    }
+
+    // Classe Interna TreeNode
     public static class TreeNode {
-        // Attributes
+        // Atributos
         private TreeNode parent;
         private int data;
         private TreeNode firstChild;
         private TreeNode next;
 
-        // Constructors
+        // Construtores
         public TreeNode() {
             this.parent = null;
             this.data = 0;
@@ -191,24 +224,18 @@ public class Tree {
             return next;
         }
 
-        // NodeTree Functions
-        public boolean hasParent() {
-            return parent != null;
-        }
+        // NodeTree Funcoes
         public void printParent() {
             if (parent != null) {
-                System.out.println(">> Parent: " + parent.getData());
+                System.out.println(">> Pai: " + parent.getData());
             } else {
-                System.out.println(">> Node nao tem pai");
+                System.out.println(">> Node não tem pai");
             }
         }
 
-        public boolean hasChildren() {
-            return firstChild != null;
-        }
         public void printChildren() {
             TreeNode current = firstChild;
-            System.out.print(">> Children of " + getData() + ": [");
+            System.out.print(">> Filhos de " + getData() + ": [");
             while (current != null) {
                 System.out.print(current.getData());
                 if (current.getNext() != null) {
@@ -219,11 +246,22 @@ public class Tree {
             System.out.println("]");
         }
 
-        public boolean isInternal() {
-            return firstChild != null;
+        public void doubleParent() {
+            if (parent == null) {
+                throw new NullPointerException("Node não tem Pai");
+            }
+            this.parent.data *= 2;
         }
-        public boolean isExternal() {
-            return firstChild == null;
+
+        public void doubleSons() {
+            if (firstChild == null) {
+                throw new RuntimeException("Node não tem Filhos");
+            }
+            TreeNode current = firstChild;
+            while (current != null) {
+                current.data *= 2;
+                current = current.getNext();
+            }
         }
 
         public int depth() {
@@ -235,6 +273,7 @@ public class Tree {
             }
             return depth;
         }
+
         public int height() {
             if (firstChild == null) {
                 return 0;
@@ -249,24 +288,23 @@ public class Tree {
         }
 
         // Pre Order
-        public void preOrder(TreeNode node) {
-            System.out.print(node.getData()+" ");
-            TreeNode current = this.firstChild;
+        public void preOrder() {
+            System.out.print(this.getData() + " ");
+            TreeNode current = this.getFirstChild();
             while (current != null) {
-                current.preOrder(current);
+                current.preOrder();
                 current = current.getNext();
             }
         }
 
-        // Pos Order
-        public void postOrder(TreeNode node) {
-            TreeNode current = node.getFirstChild();
+        // Post Order
+        public void postOrder() {
+            TreeNode current = this.getFirstChild();
             while (current != null) {
-                postOrder(current);
+                current.postOrder();
                 current = current.getNext();
             }
-            System.out.print(node.getData() + " ");
+            System.out.print(this.getData() + " ");
         }
-
     }
 }
