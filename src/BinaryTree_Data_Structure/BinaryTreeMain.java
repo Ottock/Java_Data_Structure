@@ -43,5 +43,16 @@ public class BinaryTreeMain {
         // Testando a função de valor máximo e mínimo
         System.out.println("\nValor máximo: " + tree.maxValue());
         System.out.println("Valor mínimo: " + tree.minValue());
+
+        // Testando remoção de nó
+        System.out.println("\nEstrutura da árvore após remover o nó 5:");
+        tree.removeNode(node5);
+        tree.printTree();
+
+        // Testando se a árvore está vazia
+        System.out.println("\nA árvore está vazia? " + (tree.isEmpty() ? "Sim" : "Não"));
+
+        // Exibindo tamanho da árvore
+        System.out.println("Tamanho da árvore: " + tree.getSize());
     }
 }

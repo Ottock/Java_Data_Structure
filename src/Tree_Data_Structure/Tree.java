@@ -7,43 +7,108 @@ public class Tree {
     private int size;
 
     // Construtores
+    /**
+     * Construtor padrão que inicializa uma árvore vazia.
+     */
     public Tree() {
         this.root = null;
         this.size = 0;
     }
+
+    /**
+     * Construtor que inicializa a árvore com um nó raiz específico.
+     *
+     * @param root O nó raiz da árvore.
+     */
     public Tree(TreeNode root) {
         this.root = root;
         this.size = 1;
     }
 
     // Setters
+    /**
+     * Define o nó raiz da árvore.
+     *
+     * @param root O nó raiz a ser definido.
+     */
     public void setRoot(TreeNode root) {
         this.root = root;
     }
+
+    /**
+     * Define o tamanho da árvore.
+     *
+     * @param size O tamanho a ser definido.
+     */
     public void setSize(int size) {
         this.size = size;
     }
 
     // Getters
+    /**
+     * Obtém o nó raiz da árvore.
+     *
+     * @return O nó raiz da árvore.
+     */
     public TreeNode getRoot() {
         return root;
     }
+
+    /**
+     * Obtém o tamanho da árvore.
+     *
+     * @return O tamanho da árvore.
+     */
     public int getSize() {
         return size;
     }
 
-    // Tree Funcoes
+    // Funções da árvore
+    /**
+     * Verifica se a árvore está vazia.
+     *
+     * @return true se a árvore estiver vazia, caso contrário false.
+     */
     public boolean isEmpty() {
+        /*
+        isEmpty(): Função que verifica se a árvore está vazia ou não.
+
+        :return: Boolean, onde true para "vazia" e false para "com conteúdo".
+        */
         return size == 0 && root == null;
     }
 
+    /**
+     * Busca o maior valor armazenado em um nó da árvore.
+     *
+     * @return O maior valor encontrado na árvore.
+     * @throws RuntimeException Se a árvore estiver vazia.
+     */
     public int maxValue() {
+        /*
+        maxValue(): Função que busca pelo maior valor armazenado em um Node na árvore.
+
+        :return: Função maxValue(root), que vai começar a busca pelo Node raiz.
+        */
         if (root == null) {
             throw new RuntimeException("Tree é null");
         }
         return maxValue(root);
     }
+
+    /**
+     * Busca o maior valor a partir de um nó específico.
+     *
+     * @param node O nó a partir do qual a busca será iniciada.
+     * @return O maior valor encontrado a partir do nó especificado.
+     */
     private int maxValue(TreeNode node) {
+        /*
+        maxValue(TreeNode node): Função que busca pelo maior valor armazenado em um Node na árvore.
+
+        :param TreeNode node: Node raiz da árvore onde começará a busca.
+        :return: Integer representando o maior valor contido na árvore.
+        */
         if (node == null) {
             return Integer.MIN_VALUE;
         }
@@ -56,13 +121,37 @@ public class Tree {
         return max;
     }
 
+    /**
+     * Busca o menor valor armazenado em um nó da árvore.
+     *
+     * @return O menor valor encontrado na árvore.
+     * @throws RuntimeException Se a árvore estiver vazia.
+     */
     public int minValue() {
+        /*
+        minValue(): Função que busca pelo menor valor armazenado em um Node na árvore.
+
+        :return: Função minValue(root), que vai começar a busca pelo Node raiz.
+        */
         if (root == null) {
             throw new RuntimeException("Tree é null");
         }
         return minValue(root);
     }
+
+    /**
+     * Busca o menor valor a partir de um nó específico.
+     *
+     * @param node O nó a partir do qual a busca será iniciada.
+     * @return O menor valor encontrado a partir do nó especificado.
+     */
     private int minValue(TreeNode node) {
+        /*
+        minValue(TreeNode node): Função que busca pelo menor valor armazenado em um Node na árvore.
+
+        :param TreeNode node: Node raiz da árvore onde começará a busca.
+        :return: Integer representando o menor valor contido na árvore.
+        */
         if (node == null) {
             return Integer.MAX_VALUE;
         }
@@ -75,11 +164,23 @@ public class Tree {
         return min;
     }
 
+    /**
+     * Adiciona um novo nó como filho de um nó pai especificado.
+     *
+     * @param parentNode O nó pai que receberá um novo filho.
+     * @param childNode  O nó filho que será adicionado à árvore.
+     * @throws NullPointerException Se o nó pai for null.
+     */
     public void addNode(TreeNode parentNode, TreeNode childNode) {
+        /*
+        addNode(): Função que realiza a adição de um novo Node em relação a um Node Pai.
+
+        :param: TreeNode parentNode: Node que receberá um novo filho.
+        :param: TreeNode childNode: Node que será adicionado à árvore.
+        */
         if (parentNode == null) {
             throw new NullPointerException("Pai de Node é null");
         }
-
         childNode.setParent(parentNode);
         if (parentNode.getFirstChild() == null) {
             parentNode.setFirstChild(childNode);
@@ -93,7 +194,18 @@ public class Tree {
         this.size++;
     }
 
+    /**
+     * Remove um nó da árvore.
+     *
+     * @param node O nó que será removido.
+     * @throws NullPointerException Se o nó for null.
+     */
     public void removeNode(TreeNode node) {
+        /*
+        removeNode(): Função que realiza a remoção de um Node.
+
+        :param: TreeNode node: Node que será removido.
+        */
         if (node == null) {
             throw new NullPointerException("Node é null");
         }
@@ -118,7 +230,17 @@ public class Tree {
         this.size--;
     }
 
+    /**
+     * Retorna a altura da árvore.
+     *
+     * @return A altura da árvore, onde 0 representa uma árvore com um nó e -1 uma árvore vazia.
+     */
     public int height() {
+        /*
+        height(): Função que retorna a altura que a Tree tem.
+
+        :return: Integer representando a altura da Tree.
+        */
         if (root == null) {
             return -1;
         }
@@ -126,6 +248,11 @@ public class Tree {
     }
 
     // Pre Order traversal
+    /**
+     * Realiza a travessia em pré-ordem da árvore e imprime os valores.
+     *
+     * @throws NullPointerException Se a árvore estiver vazia.
+     */
     public void preOrder() {
         if (root == null) {
             throw new NullPointerException("Tree é null");
@@ -136,6 +263,11 @@ public class Tree {
     }
 
     // Post Order traversal
+    /**
+     * Realiza a travessia em pós-ordem da árvore e imprime os valores.
+     *
+     * @throws NullPointerException Se a árvore estiver vazia.
+     */
     public void postOrder() {
         if (root == null) {
             throw new NullPointerException("Tree é null");
@@ -145,7 +277,9 @@ public class Tree {
         System.out.println("]");
     }
 
-    // Imprimir árvore no formato desejado
+    /**
+     * Imprime a árvore no formato desejado.
+     */
     public void printTree() {
         if (root == null) {
             System.out.println("A árvore está vazia.");
@@ -154,10 +288,17 @@ public class Tree {
         }
     }
 
-    private void printTree(TreeNode node, String indent, boolean isLast) {
+    /**
+     * Método auxiliar que imprime a árvore a partir de um nó específico.
+     *
+     * @param node   O nó atual a ser impresso.
+     * @param indent A indentação atual para o formato de impressão.
+     * @param last Indica se o nó é o último filho do nó pai.
+     */
+    private void printTree(TreeNode node, String indent, boolean last) {
         if (node != null) {
             System.out.print(indent);
-            if (isLast) {
+            if (last) {
                 System.out.print("└── ");
                 indent += "    ";
             } else {
@@ -165,7 +306,6 @@ public class Tree {
                 indent += "│   ";
             }
             System.out.println(node.getData());
-
             TreeNode child = node.getFirstChild();
             while (child != null) {
                 printTree(child, indent, child.getNext() == null);
@@ -174,137 +314,138 @@ public class Tree {
         }
     }
 
-    // Classe Interna TreeNode
+    /**
+     * Classe interna que representa um nó da árvore.
+     */
     public static class TreeNode {
-        // Atributos
-        private TreeNode parent;
         private int data;
+        private TreeNode parent;
         private TreeNode firstChild;
         private TreeNode next;
 
-        // Construtores
-        public TreeNode() {
-            this.parent = null;
-            this.data = 0;
-            this.firstChild = null;
-            this.next = null;
-        }
+        /**
+         * Construtor que inicializa um nó com um valor específico.
+         *
+         * @param data O valor a ser armazenado no nó.
+         */
         public TreeNode(int data) {
-            this.parent = null;
             this.data = data;
+            this.parent = null;
             this.firstChild = null;
             this.next = null;
         }
 
-        // Setters
-        public void setParent(TreeNode parent) {
-            this.parent = parent;
-        }
-        public void setData(int data) {
-            this.data = data;
-        }
-        public void setFirstChild(TreeNode firstChild) {
-            this.firstChild = firstChild;
-        }
-        public void setNext(TreeNode next) {
-            this.next = next;
-        }
-
-        // Getters
-        public TreeNode getParent() {
-            return parent;
-        }
+        // Getters e Setters
+        /**
+         * Obtém o valor armazenado no nó.
+         *
+         * @return O valor do nó.
+         */
         public int getData() {
             return data;
         }
+
+        /**
+         * Define o valor armazenado no nó.
+         *
+         * @param data O valor a ser definido.
+         */
+        public void setData(int data) {
+            this.data = data;
+        }
+
+        /**
+         * Obtém o nó pai do nó atual.
+         *
+         * @return O nó pai.
+         */
+        public TreeNode getParent() {
+            return parent;
+        }
+
+        /**
+         * Define o nó pai do nó atual.
+         *
+         * @param parent O nó pai a ser definido.
+         */
+        public void setParent(TreeNode parent) {
+            this.parent = parent;
+        }
+
+        /**
+         * Obtém o primeiro filho do nó atual.
+         *
+         * @return O primeiro filho do nó.
+         */
         public TreeNode getFirstChild() {
             return firstChild;
         }
+
+        /**
+         * Define o primeiro filho do nó atual.
+         *
+         * @param firstChild O primeiro filho a ser definido.
+         */
+        public void setFirstChild(TreeNode firstChild) {
+            this.firstChild = firstChild;
+        }
+
+        /**
+         * Obtém o próximo nó.
+         *
+         * @return O próximo nó.
+         */
         public TreeNode getNext() {
             return next;
         }
 
-        // NodeTree Funcoes
-        public void printParent() {
-            if (parent != null) {
-                System.out.println(">> Pai: " + parent.getData());
-            } else {
-                System.out.println(">> Node não tem pai");
-            }
+        /**
+         * Define o próximo nó.
+         *
+         * @param next O próximo nó a ser definido.
+         */
+        public void setNext(TreeNode next) {
+            this.next = next;
         }
 
-        public void printChildren() {
-            TreeNode current = firstChild;
-            System.out.print(">> Filhos de " + getData() + ": [");
-            while (current != null) {
-                System.out.print(current.getData());
-                if (current.getNext() != null) {
-                    System.out.print(", ");
-                }
-                current = current.getNext();
-            }
-            System.out.println("]");
-        }
-
-        public void doubleParent() {
-            if (parent == null) {
-                throw new NullPointerException("Node não tem Pai");
-            }
-            this.parent.data *= 2;
-        }
-
-        public void doubleSons() {
-            if (firstChild == null) {
-                throw new RuntimeException("Node não tem Filhos");
-            }
-            TreeNode current = firstChild;
-            while (current != null) {
-                current.data *= 2;
-                current = current.getNext();
-            }
-        }
-
-        public int depth() {
-            int depth = 0;
-            TreeNode current = this;
-            while (current.getParent() != null) {
-                depth++;
-                current = current.getParent();
-            }
-            return depth;
-        }
-
-        public int height() {
-            if (firstChild == null) {
-                return 0;
-            }
-            int height = 0;
-            TreeNode current = firstChild;
-            while (current != null) {
-                height = Math.max(height, current.height());
-                current = current.getNext();
-            }
-            return height + 1;
-        }
-
-        // Pre Order
+        // Funções de travessia
+        /**
+         * Realiza a travessia em pré-ordem a partir do nó atual.
+         */
         public void preOrder() {
-            System.out.print(this.getData() + " ");
-            TreeNode current = this.getFirstChild();
-            while (current != null) {
-                current.preOrder();
-                current = current.getNext();
+            System.out.print(data + " ");
+            TreeNode child = firstChild;
+            while (child != null) {
+                child.preOrder();
+                child = child.getNext();
             }
         }
 
-        // Post Order
+        /**
+         * Realiza a travessia em pós-ordem a partir do nó atual.
+         */
         public void postOrder() {
-            TreeNode current = this.getFirstChild();
-            while (current != null) {
-                current.postOrder();
-                current = current.getNext();
+            TreeNode child = firstChild;
+            while (child != null) {
+                child.postOrder();
+                child = child.getNext();
             }
-            System.out.print(this.getData() + " ");
+            System.out.print(data + " ");
+        }
+
+        /**
+         * Retorna a altura do nó a partir de sua posição na árvore.
+         *
+         * @return A altura do nó.
+         */
+        public int height() {
+            int maxHeight = -1; // Caso base, no mínimo altura 0.
+            TreeNode child = firstChild;
+            while (child != null) {
+                maxHeight = Math.max(maxHeight, child.height());
+                child = child.getNext();
+            }
+            return maxHeight + 1; // Adiciona um ao máximo para contar o próprio nó.
         }
     }
 }
