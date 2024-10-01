@@ -1,0 +1,2 @@
+Refazer HeapSort, ListArray, LinkedList, Hashing;
+Estruturas de dados lineares;

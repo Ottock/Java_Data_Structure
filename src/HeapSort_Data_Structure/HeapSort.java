@@ -6,16 +6,16 @@ package HeapSort_Data_Structure;
 public class HeapSort {
 
     /**
-     * Ordena o array usando o algoritmo HeapSort.
+     * Ordena o array usando o algoritmo HeapSort (MaxHeap).
      *
      * @param arr O array de inteiros a ser ordenado.
      */
-    public void sort(int[] arr) {
+    public void sortMaxHeap(int[] arr) {
         int n = arr.length;
 
         // Constrói o heap (rearranja o array)
         for (int i = n / 2 - 1; i >= 0; i--) {
-            heapify(arr, n, i);
+            maxHeapify(arr, n, i);
         }
 
         // Extrai um elemento do heap de cada vez
@@ -26,19 +26,43 @@ public class HeapSort {
             arr[i] = temp;
 
             // Chama o heapify na árvore reduzida
-            heapify(arr, i, 0);
+            maxHeapify(arr, i, 0);
         }
     }
 
     /**
-     * "Heapifica" uma subárvore com a raiz no índice i.
-     * Esse método garante que a subárvore com raiz no índice i seja um heap.
+     * Ordena o array usando o algoritmo HeapSort (MinHeap).
+     *
+     * @param arr O array de inteiros a ser ordenado.
+     */
+    public void sortMinHeap(int[] arr) {
+        int n = arr.length;
+
+        // Constrói o heap (rearranja o array)
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            minHeapify(arr, n, i);
+        }
+
+        // Extrai um elemento do heap de cada vez
+        for (int i = n - 1; i > 0; i--) {
+            // Move a raiz atual (o menor elemento) para o final
+            int temp = arr[0];
+            arr[0] = arr[i];
+            arr[i] = temp;
+
+            // Chama o heapify na árvore reduzida
+            minHeapify(arr, i, 0);
+        }
+    }
+
+    /**
+     * "Heapifica" uma subárvore com a raiz no índice i (MaxHeap).
      *
      * @param arr O array de inteiros.
      * @param n   Tamanho do heap.
      * @param i   Índice da raiz da subárvore.
      */
-    private void heapify(int[] arr, int n, int i) {
+    private void maxHeapify(int[] arr, int n, int i) {
         int largest = i;  // Inicializa o maior como raiz
         int left = 2 * i + 1;  // Filho à esquerda
         int right = 2 * i + 2;  // Filho à direita
@@ -60,7 +84,40 @@ public class HeapSort {
             arr[largest] = swap;
 
             // Recursivamente heapifica a subárvore afetada
-            heapify(arr, n, largest);
+            maxHeapify(arr, n, largest);
+        }
+    }
+
+    /**
+     * "Heapifica" uma subárvore com a raiz no índice i (MinHeap).
+     *
+     * @param arr O array de inteiros.
+     * @param n   Tamanho do heap.
+     * @param i   Índice da raiz da subárvore.
+     */
+    private void minHeapify(int[] arr, int n, int i) {
+        int smallest = i;  // Inicializa o menor como raiz
+        int left = 2 * i + 1;  // Filho à esquerda
+        int right = 2 * i + 2;  // Filho à direita
+
+        // Se o filho à esquerda é menor que a raiz
+        if (left < n && arr[left] < arr[smallest]) {
+            smallest = left;
+        }
+
+        // Se o filho à direita é menor que o menor até agora
+        if (right < n && arr[right] < arr[smallest]) {
+            smallest = right;
+        }
+
+        // Se o menor não for a raiz
+        if (smallest != i) {
+            int swap = arr[i];
+            arr[i] = arr[smallest];
+            arr[smallest] = swap;
+
+            // Recursivamente heapifica a subárvore afetada
+            minHeapify(arr, n, smallest);
         }
     }
 
@@ -71,15 +128,19 @@ public class HeapSort {
      */
     public static void main(String[] args) {
         HeapSort heapSort = new HeapSort();
-        int[] arr = {12, 11, 13, 5, 6, 7};
+        int[] arrMax = {12, 11, 13, 5, 6, 7};
+        int[] arrMin = {12, 11, 13, 5, 6, 7};
 
         System.out.println("Array original:");
-        printArray(arr);
+        printArray(arrMax);
 
-        heapSort.sort(arr);
+        heapSort.sortMaxHeap(arrMax);
+        System.out.println("Array ordenado (MaxHeap):");
+        printArray(arrMax);
 
-        System.out.println("Array ordenado:");
-        printArray(arr);
+        heapSort.sortMinHeap(arrMin);
+        System.out.println("Array ordenado (MinHeap):");
+        printArray(arrMin);
     }
 
     /**

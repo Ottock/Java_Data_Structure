@@ -1,0 +1,81 @@
+>> Grafos
+Um grafo é uma estrutura matemática composta por um conjunto de vértices (ou nós) e um conjunto de arestas (ou ligações) que conectam pares de vértices. Os grafos podem ser utilizados para modelar diversas situações em computação, redes e outras áreas.
+
+>> Arestas Paralelas
+Arestas paralelas referem-se a múltiplas arestas que conectam o mesmo par de vértices. Em um grafo simples, não são permitidas arestas paralelas, ou seja, cada par de vértices pode ser conectado por, no máximo, uma aresta.
+
+>> Vértice Isolado
+Um vértice isolado é um vértice que não possui arestas conectadas a ele. Isso significa que não está associado a nenhum outro vértice no grafo.
+
+>> Vértices Adjacentes
+Dois vértices adjacentes são aqueles que estão conectados diretamente por uma aresta. Se houver uma aresta ligando os vértices
+𝑢
+u e
+𝑣
+v, então
+𝑢
+u e
+𝑣
+v são adjacentes.
+
+>> Grafo Simples
+Um grafo simples é um tipo de grafo que não possui arestas paralelas e não possui laços (arestas que conectam um vértice a ele mesmo).
+
+>> Grau de um Vértice
+O grau de um vértice é o número de arestas que estão conectadas a ele. Se um vértice
+𝑣
+v tem
+𝑑
+d arestas conectadas, dizemos que o grau de
+𝑣
+v é
+𝑑
+d.
+
+>> Vértice Par ou Ímpar
+Um vértice é classificado como par se o seu grau é um número par e ímpar se o seu grau é um número ímpar. O conjunto dos graus dos vértices de um grafo pode ser analisado para determinar a paridade dos vértices.
+
+>> Teorema 1
+A Soma dos Graus dos Vértices: A soma dos graus de todos os vértices de um grafo é o dobro da quantidade de arestas. Esse teorema é fundamental para entender a relação entre vértices e arestas.
+
+>> Teorema 2
+O Número de Vértices Ímpares: O número de vértices com grau ímpar em um grafo é sempre par. Isso é uma consequência direta do Teorema 1, uma vez que cada aresta contribui para o grau de dois vértices.
+
+>> Teorema 3.2
+Reafirma que o número de vértices ímpares em um grafo é sempre par. Além disso, o conceito de grafo regular é importante, onde todos os vértices têm o mesmo grau.
+
+>> Grafos Isomorfos
+Grafos isomorfos são grafos que têm a mesma estrutura, ou seja, existe uma correspondência bijetiva entre os vértices de dois grafos que preserva a adjacência. Invariantes de grafos isomorfos são propriedades que permanecem constantes sob isomorfismo, como o número de vértices e arestas.
+
+>> Grafo Bipartido
+Um grafo bipartido é um grafo cujos vértices podem ser divididos em duas partes disjuntas, de modo que não existam arestas entre vértices da mesma parte. Esse tipo de grafo é útil para modelar relacionamentos entre duas classes distintas de objetos.
+
+>> Subgrafo
+Um subgrafo é uma parte de um grafo que consiste em um conjunto de vértices e arestas que pertencem ao grafo original.
+
+>> Grafos Eulerianos
+Um grafo euleriano é um grafo que contém um ciclo que visita todas as arestas exatamente uma vez. Um grafo é euleriano se e somente se todos os seus vértices têm grau par.
+
+O Teorema de Euler para grafos fornece uma condição necessária e suficiente para que um grafo seja Euleriano, ou seja, que possua um ciclo que passe por todas as arestas exatamente uma vez. O teorema pode ser resumido nos seguintes pontos:
+
+Condições para um Grafo Ser Euleriano:
+
+Um grafo é Euleriano se e somente se:
+Ele é conexo (existe um caminho entre qualquer par de vértices).
+Todos os vértices do grafo têm um grau par.
+Caminho Euleriano:
+
+Se um grafo é conexo e tem exatamente dois vértices de grau ímpar, ele possui um caminho Euleriano, que é uma sequência de arestas que visita cada aresta exatamente uma vez, começando em um dos vértices de grau ímpar e terminando no outro.
+Implicações:
+
+Se um grafo tem todos os vértices de grau par, ele possui tanto um ciclo Euleriano quanto um caminho Euleriano.
+Se um grafo possui mais de dois vértices de grau ímpar, ele não pode ser Euleriano.
+Este teorema é uma base importante na teoria dos grafos e é frequentemente aplicado em problemas que envolvem a necessidade de percorrer todos os caminhos ou arestas de uma rede sem repetir nenhum caminho. Um exemplo clássico do Teorema de Euler é o problema das sete pontes de Königsberg, que levou ao desenvolvimento da teoria dos grafos.
+
+O Problema das Sete Pontes de Königsberg é um clássico da teoria dos grafos, formulado no século XVIII. Ele envolve a cidade de Königsberg, que tinha duas ilhas e duas margens do rio conectadas por sete pontes. O desafio era encontrar um caminho que atravessasse todas as pontes exatamente uma vez.
+
+>> Conclusão de Euler:
+
+Leonhard Euler analisou o problema e determinou que, para existir tal caminho, todos os vértices do grafo (as regiões) deveriam ter grau par, ou, no máximo, dois vértices com grau ímpar.
+No caso de Königsberg, havia quatro vértices com grau ímpar, o que impossibilitava um caminho que passasse por todas as pontes sem repetições.
+Esse problema foi fundamental para o desenvolvimento da teoria dos grafos e da topologia.
