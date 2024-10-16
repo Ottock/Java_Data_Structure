@@ -1,7 +1,5 @@
-// src/LinkedList_Data_Structure/LinkedListMain.java
-package LinkedList_Data_Structure;
-
-// Import
+// src/Linear_Data_Structures.LinkedList_Data_Structure/LinkedListMain.java
+package Linear_Data_Structures.LinkedList_Data_Structure;
 
 public class LinkedListMain {
     public static void main(String[] args) {

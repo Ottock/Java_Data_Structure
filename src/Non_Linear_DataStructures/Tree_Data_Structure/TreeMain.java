@@ -1,5 +1,5 @@
-// src/Tree_Data_Structure/TreeMain.java
-package Tree_Data_Structure;
+// src/Non_Linear_DataStructures.Non_Linear_DataStructures.Tree_Data_Structure/TreeMain.java
+package Non_Linear_DataStructures.Tree_Data_Structure;
 
 public class TreeMain {
     public static void main(String[] args) {

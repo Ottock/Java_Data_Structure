@@ -1,5 +1,5 @@
-// src/LinkedList_Data_Structure/LinkedList.java
-package LinkedList_Data_Structure;
+// src/Linear_Data_Structures.LinkedList_Data_Structure/LinkedList.java
+package Linear_Data_Structures.LinkedList_Data_Structure;
 
 /**
  * Uma classe LinkedList que representa uma estrutura de dados de lista encadeada.

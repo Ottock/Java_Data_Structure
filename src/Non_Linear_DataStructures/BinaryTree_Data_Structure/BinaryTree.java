@@ -1,5 +1,5 @@
-// src/BinaryTree_Data_Structure/BinaryTree.java
-package BinaryTree_Data_Structure;
+// src/Linear_Data_Structures.Linear_Data_Structures.BinaryTree_Data_Structure.BinaryTree_Data_Structure/BinaryTree.java
+package Non_Linear_DataStructures.BinaryTree_Data_Structure;
 
 // Imports
 import java.util.NoSuchElementException;

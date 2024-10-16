@@ -1,5 +1,5 @@
 // src/BinarySearchTree/TreeMain.java
-package BinarySearchTree_Data_Structure;
+package Non_Linear_DataStructures.BinarySearchTree_Data_Structure;
 
 public class BinarySearchTreeMain {
     public static void main(String[] args) {
