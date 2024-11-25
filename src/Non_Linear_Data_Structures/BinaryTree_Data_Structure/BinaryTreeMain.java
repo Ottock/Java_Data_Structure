@@ -1,5 +1,5 @@
 // src/Linear_Data_Structures.Linear_Data_Structures.BinaryTree_Data_Structure.BinaryTree_Data_Structure/Main.java
-package Non_Linear_DataStructures.BinaryTree_Data_Structure;
+package Non_Linear_Data_Structures.BinaryTree_Data_Structure;
 
 public class BinaryTreeMain {
     public static void main(String[] args) {

@@ -1,5 +1,5 @@
 // src/Linear_Data_Structures.Non_Linear_DataStructures.Tree_Data_Structure.BinaryTree_Data_Structure.BinaryTree_Data_Structure.BinarySearchTree_Data_Structure/BinarySearchTree.java
-package Non_Linear_DataStructures.BinarySearchTree_Data_Structure;
+package Non_Linear_Data_Structures.BinarySearchTree_Data_Structure;
 
 /**
  * Classe que representa uma Árvore Binária de Busca (Binary Search Tree - BST).
