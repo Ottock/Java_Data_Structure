@@ -1,19 +1,14 @@
-// src/Non_Linear_DataStructures/Graph_Data_Structure/Graphs.java
 package Non_Linear_Data_Structures.Graph_Data_Structure;
 
-// Import
 import java.util.*;
 
 public class Graph {
-    // Atributos
     private ArrayList<Vertex> vertices;
 
-    // Construtor
     public Graph() {
         this.vertices = new ArrayList<>();
     }
 
-    // Classe Vertex
     public class Vertex {
         private String data;
         private List<Edge> edges;
@@ -36,7 +31,6 @@ public class Graph {
         }
     }
 
-    // Classe Edge
     public class Edge {
         private Vertex start;
         private Vertex end;
@@ -55,14 +49,59 @@ public class Graph {
         public int getWeight() {
             return weight;
         }
+
+        public Vertex getStart() {
+            return start;
+        }
     }
 
-    // Adiciona um vértice ao grafo
     public void addVertex(Vertex vertex) {
         vertices.add(vertex);
     }
 
-    // Implementação do algoritmo de Dijkstra sem PriorityQueue
+    // BFS - Busca em Largura
+    public void bfs(Vertex start) {
+        Queue<Vertex> queue = new LinkedList<>();
+        Set<Vertex> visited = new HashSet<>();
+        
+        queue.add(start);
+        visited.add(start);
+        
+        while (!queue.isEmpty()) {
+            Vertex current = queue.poll();
+            System.out.print(current.getData() + " ");
+
+            for (Edge edge : current.getEdgeList()) {
+                Vertex neighbor = edge.getEnd();
+                if (!visited.contains(neighbor)) {
+                    queue.add(neighbor);
+                    visited.add(neighbor);
+                }
+            }
+        }
+        System.out.println();
+    }
+
+    // DFS - Busca em Profundidade
+    public void dfs(Vertex start) {
+        Set<Vertex> visited = new HashSet<>();
+        dfsHelper(start, visited);
+        System.out.println();
+    }
+
+    private void dfsHelper(Vertex vertex, Set<Vertex> visited) {
+        visited.add(vertex);
+        System.out.print(vertex.getData() + " ");
+        
+        for (Edge edge : vertex.getEdgeList()) {
+            Vertex neighbor = edge.getEnd();
+            if (!visited.contains(neighbor)) {
+                dfsHelper(neighbor, visited);
+            }
+        }
+    }
+
+    // Dijkstra - Algoritmo de Dijkstra sem PriorityQueue
     public void dijkstra(Vertex start) {
         int numVertices = vertices.size();
         int[] distances = new int[numVertices];
@@ -70,13 +109,10 @@ public class Graph {
         Arrays.fill(distances, Integer.MAX_VALUE);
         distances[vertices.indexOf(start)] = 0;
 
-        // Enquanto existirem vértices não visitados
         for (int i = 0; i < numVertices; i++) {
-            // Seleciona o vértice não visitado com a menor distância
             int u = getMinDistanceVertex(distances, visited);
             visited[u] = true;
 
-            // Atualiza as distâncias dos vizinhos do vértice u
             for (Edge edge : vertices.get(u).getEdgeList()) {
                 int v = vertices.indexOf(edge.getEnd());
                 if (!visited[v] && distances[u] + edge.getWeight() < distances[v]) {
@@ -85,25 +121,121 @@ public class Graph {
             }
         }
 
-        // Exibe as distâncias
         System.out.println("Distâncias a partir do vértice " + start.getData() + ":");
         for (int i = 0; i < numVertices; i++) {
             System.out.println("Distância até " + vertices.get(i).getData() + ": " + distances[i]);
         }
     }
 
-    // Método auxiliar para obter o índice do vértice com a menor distância
     private int getMinDistanceVertex(int[] distances, boolean[] visited) {
         int min = Integer.MAX_VALUE;
         int minIndex = -1;
-
         for (int i = 0; i < distances.length; i++) {
             if (!visited[i] && distances[i] < min) {
                 min = distances[i];
                 minIndex = i;
             }
         }
-
         return minIndex;
+    }
+
+    // Kruskal - Algoritmo de Kruskal
+    public void kruskal() {
+        List<Edge> edges = new ArrayList<>();
+        for (Vertex vertex : vertices) {
+            edges.addAll(vertex.getEdgeList());
+        }
+
+        // Ordenar as arestas por peso
+        edges.sort(Comparator.comparingInt(Edge::getWeight));
+
+        // Implementação do Union-Find
+        UnionFind uf = new UnionFind(vertices.size());
+        List<Edge> mst = new ArrayList<>();
+
+        for (Edge edge : edges) {
+            int startIdx = vertices.indexOf(edge.getStart());
+            int endIdx = vertices.indexOf(edge.getEnd());
+
+            if (uf.find(startIdx) != uf.find(endIdx)) {
+                uf.union(startIdx, endIdx);
+                mst.add(edge);
+            }
+        }
+
+        System.out.println("Árvore Geradora Mínima (Kruskal):");
+        for (Edge edge : mst) {
+            System.out.println(edge.getStart().getData() + " - " + edge.getEnd().getData() + " (" + edge.getWeight() + ")");
+        }
+    }
+
+    // Prim - Algoritmo de Prim
+    public void prim(Vertex start) {
+        Set<Vertex> inMST = new HashSet<>();
+        PriorityQueue<Edge> edgeQueue = new PriorityQueue<>(Comparator.comparingInt(Edge::getWeight));
+
+        inMST.add(start);
+        for (Edge edge : start.getEdgeList()) {
+            edgeQueue.add(edge);
+        }
+
+        List<Edge> mst = new ArrayList<>();
+
+        while (inMST.size() < vertices.size()) {
+            Edge edge = edgeQueue.poll();
+            Vertex v = edge.getEnd();
+
+            if (!inMST.contains(v)) {
+                inMST.add(v);
+                mst.add(edge);
+                for (Edge nextEdge : v.getEdgeList()) {
+                    if (!inMST.contains(nextEdge.getEnd())) {
+                        edgeQueue.add(nextEdge);
+                    }
+                }
+            }
+        }
+
+        System.out.println("Árvore Geradora Mínima (Prim):");
+        for (Edge edge : mst) {
+            System.out.println(edge.getStart().getData() + " - " + edge.getEnd().getData() + " (" + edge.getWeight() + ")");
+        }
+    }
+
+    private static class UnionFind {
+        private int[] parent;
+        private int[] rank;
+
+        public UnionFind(int size) {
+            parent = new int[size];
+            rank = new int[size];
+            for (int i = 0; i < size; i++) {
+                parent[i] = i;
+                rank[i] = 0;
+            }
+        }
+
+        public int find(int i) {
+            if (parent[i] != i) {
+                parent[i] = find(parent[i]);
+            }
+            return parent[i];
+        }
+
+        public void union(int i, int j) {
+            int rootI = find(i);
+            int rootJ = find(j);
+
+            if (rootI != rootJ) {
+                if (rank[rootI] > rank[rootJ]) {
+                    parent[rootJ] = rootI;
+                } else if (rank[rootI] < rank[rootJ]) {
+                    parent[rootI] = rootJ;
+                } else {
+                    parent[rootJ] = rootI;
+                    rank[rootI]++;
+                }
+            }
+        }
     }
 }
