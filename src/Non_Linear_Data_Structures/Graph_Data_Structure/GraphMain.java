@@ -20,6 +20,10 @@ public class GraphMain {
         B.addEdge(graph.new Edge(B, D, 5));
         C.addEdge(graph.new Edge(C, D, 3));
 
+        graph.printGraph();
+
+        graph.printAdjacencyMatrix();
+
         System.out.println(">> Resultado da Busca em Largura (BFS):");
         graph.bfs(A);
         

@@ -9,6 +9,53 @@ public class Graph {
         this.vertices = new ArrayList<>();
     }
 
+    public void printGraph() {
+        System.out.println("Grafo:");
+        for (Vertex vertex : vertices) {
+            System.out.print(vertex.getData() + " -> ");
+            List<Edge> edges = vertex.getEdgeList();
+            if (edges.isEmpty()) {
+                System.out.print("sem arestas");
+            } else {
+                for (Edge edge : edges) {
+                    System.out.print(edge.getEnd().getData() + "(" + edge.getWeight() + ") ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public void printAdjacencyMatrix() {
+        int numVertices = vertices.size();
+        int[][] adjacencyMatrix = new int[numVertices][numVertices];
+    
+        // Preencher a matriz de adjacência
+        for (int i = 0; i < numVertices; i++) {
+            Vertex vertex = vertices.get(i);
+            for (Edge edge : vertex.getEdgeList()) {
+                int j = vertices.indexOf(edge.getEnd());
+                adjacencyMatrix[i][j] = edge.getWeight();
+            }
+        }
+    
+        // Exibir a matriz de adjacência
+        System.out.println("Matriz de Adjacência:");
+        System.out.print("  ");
+        for (Vertex vertex : vertices) {
+            System.out.print(vertex.getData() + " ");
+        }
+        System.out.println();
+        
+        for (int i = 0; i < numVertices; i++) {
+            System.out.print(vertices.get(i).getData() + " ");
+            for (int j = 0; j < numVertices; j++) {
+                System.out.print(adjacencyMatrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+    
+
     public class Vertex {
         private String data;
         private List<Edge> edges;
