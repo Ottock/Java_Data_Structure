@@ -3,7 +3,7 @@ package Non_Linear_Data_Structures.Graph_Data_Structure;
 import java.util.*;
 
 public class Graph {
-    private ArrayList<Vertex> vertices;
+    private final ArrayList<Vertex> vertices;
 
     public Graph() {
         this.vertices = new ArrayList<>();
@@ -57,8 +57,8 @@ public class Graph {
     
 
     public class Vertex {
-        private String data;
-        private List<Edge> edges;
+        private final String data;
+        private final List<Edge> edges;
 
         public Vertex(String data) {
             this.data = data;
@@ -79,9 +79,9 @@ public class Graph {
     }
 
     public class Edge {
-        private Vertex start;
-        private Vertex end;
-        private int weight;
+        private final Vertex start;
+        private final Vertex end;
+        private final int weight;
 
         public Edge(Vertex start, Vertex end, int weight) {
             this.start = start;
@@ -250,8 +250,8 @@ public class Graph {
     }
 
     private static class UnionFind {
-        private int[] parent;
-        private int[] rank;
+        private final int[] parent;
+        private final int[] rank;
 
         public UnionFind(int size) {
             parent = new int[size];
